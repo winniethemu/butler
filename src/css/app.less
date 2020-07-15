@@ -1,0 +1,167 @@
+@light-grey:    #EBECF0;
+@alt-grey:      #DADBE2;
+@regular-text:  #172B4D;
+
+.app {
+  width: 320px;
+  height: 280px;
+  font-size: 14px;
+  color: @regular-text;
+  background-color: @light-grey;
+  overflow-y: scroll;
+
+  a {
+    color: #5E6C84;
+
+    &:hover {
+      color: @regular-text;
+    }
+  }
+
+  fieldset {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  .anchor-button {
+    border: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 8px;
+    outline: none;
+    background-color: @alt-grey;
+
+    &:hover {
+      cursor: pointer;
+      background-color: darken(@alt-grey, 10%);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: @alt-grey;
+    }
+  }
+}
+
+.simple {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.welcome {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  .tip {
+    padding: 0 10px;
+  }
+}
+
+.new-session {
+  color: @regular-text;
+
+  header {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  fieldset {
+    margin-bottom: 10px;
+  }
+
+  input {
+    border: none;
+    border-bottom: 1px dashed @regular-text;
+    background: none;
+    outline: none;
+    padding-bottom: 2px;
+  }
+
+  ::-webkit-input-placeholder {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  label {
+    font-size: 12px;
+    display: block;
+  }
+
+  .back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+}
+
+.session-list {
+  margin-bottom: 42px;
+
+  .catalog {
+    margin: 0;
+    padding: 0 10px;
+
+    li {
+      list-style-type: none;
+      padding: 8px 6px;
+      margin-bottom: 6px;
+      background-color: white;
+      border-radius: 3px;
+      box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
+
+      .MuiSwitch-root {
+        vertical-align: top;
+      }
+
+      .item-info {
+        max-width: 200px;
+        display: inline-block;
+        padding-left: 10px;
+      }
+
+      .item-name, .item-detail {
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .item-detail {
+        margin-top: 2px;
+        color: darken(@alt-grey, 10%);
+        font-size: 12px;
+      }
+
+      .item-control {
+        float: right;
+        font-size: 20px;
+
+        &:hover {
+          background-color: @alt-grey;
+          border-radius: 3px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    li.current .item-name {
+      font-weight: 600;
+    }
+  }
+
+  header {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
