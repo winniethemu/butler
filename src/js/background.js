@@ -15,7 +15,7 @@ const queue = [];
 async function process() {
   const { type, data } = queue[0];
   const current = await getCurrentSession();
-  if (!current) return;
+  if (!current) return queue.shift();
   const sessions = await getSessions();
   let tabs = sessions[current].tabs;
 
