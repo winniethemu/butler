@@ -6,27 +6,7 @@ import classNames from 'classnames';
 import { getCurrentSession, getSessions } from '../util.js';
 
 export default function SessionList(props) {
-  const [items, setItems] = useState({});
-  const [current, setCurrent] = useState(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    async function fetchData() {
-      const data = await getSessions();
-      const curr = await getCurrentSession();
-      if (!cancelled) {
-        setItems(data);
-        setCurrent(curr);
-      }
-    }
-    fetchData();
-
-    return () => {
-      cancelled = true;
-    };
-  });
-
-  const listItems = Object.entries(items).map(session => {
+  const listItems = Object.entries(props.items).map(session => {
     const [id, data] = session;
     const name = data.name ? data.name : id;
     const count = data.tabs.length > 1 ?
@@ -37,12 +17,12 @@ export default function SessionList(props) {
         key={id}
         className={classNames({
           'session-item': true,
-          'current': current === id
+          'current': props.current === id
         })}
       >
         <Switch
-          checked={current === id}
-          disabled={current && current !== id}
+          checked={props.current === id}
+          disabled={props.current && props.current !== id}
           size="small"
           color="primary"
           onChange={() => { props.handleChange(id, session); }}
@@ -68,7 +48,7 @@ export default function SessionList(props) {
       <button
         onClick={props.handleNew}
         className="anchor-button"
-        disabled={current}
+        disabled={props.current}
       >
         New Session
       </button>

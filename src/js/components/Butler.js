@@ -15,12 +15,15 @@ import {
 
 export default function Butler(props) {
   const [create, setCreate] = useState(false);
-  const [items, setItems] = useState([]);
+  const [current, setCurrent] = useState(null);
+  const [items, setItems] = useState({});
 
   useLayoutEffect(() => {
     async function fetchData() {
       const data = await getSessions();
-      setItems(Object.keys(data));
+      const curr = await getCurrentSession();
+      setItems(data);
+      setCurrent(curr);
     }
     fetchData();
   }, []);
@@ -42,16 +45,18 @@ export default function Butler(props) {
     sessions[id] = { name: data.name, timestamp: Date.now(), tabs };
     await setSessions(sessions);
     setCreate(false);
-    setItems(Object.keys(sessions));
+    setItems(sessions);
   }
 
   async function handleDelete(id) {
-    const current = await getCurrentSession();
-    if (current === id) await setCurrentSession(null);
+    if (current === id) {
+      setCurrent(null);
+      await setCurrentSession(null);
+    }
     const sessions = await getSessions();
     delete sessions[id];
     await setSessions(sessions);
-    setItems(Object.keys(sessions));
+    setItems(sessions);
   }
 
   async function handleRestore(session) {
@@ -61,10 +66,11 @@ export default function Butler(props) {
   }
 
   async function handleChange(id, session) {
-    const current = await getCurrentSession();
     if (current) {
+      setCurrent(null);
       await setCurrentSession(null);
     } else {
+      setCurrent(id);
       await setCurrentSession(id);
       await handleRestore(session);
     }
@@ -78,9 +84,12 @@ export default function Butler(props) {
           handleSubmit={handleCreate}
         />
       }
-      {!create && items.length < 1 && <Welcome handleClick={handleNew} />}
-      {!create && items.length > 0 &&
+      {!create && Object.keys(items).length < 1 &&
+        <Welcome handleClick={handleNew} />}
+      {!create && Object.keys(items).length > 0 &&
         <SessionList
+          items={items}
+          current={current}
           handleChange={handleChange}
           handleDelete={handleDelete}
           handleNew={handleNew}

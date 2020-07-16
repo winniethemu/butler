@@ -23,7 +23,7 @@ export default function NewSession(props) {
           <input
             type="text"
             value={name}
-            placeholder="e.g. Weekend plans"
+            placeholder="e.g. Weekend Trip"
             onChange={handleChange}
           />
           <label>(optional)</label>
