@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { getCurrentSession, getSessions } from '../util.js';
 
 export default function SessionList(props) {
-  const [sessions, setSessions] = useState({});
+  const [items, setItems] = useState({});
   const [current, setCurrent] = useState(null);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function SessionList(props) {
       const data = await getSessions();
       const curr = await getCurrentSession();
       if (!cancelled) {
-        setSessions(data);
+        setItems(data);
         setCurrent(curr);
       }
     }
@@ -26,7 +26,7 @@ export default function SessionList(props) {
     };
   });
 
-  const listItems = Object.entries(sessions).map(session => {
+  const listItems = Object.entries(items).map(session => {
     const [id, data] = session;
     const name = data.name ? data.name : id;
     const count = data.tabs.length > 1 ?

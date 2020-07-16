@@ -61,7 +61,13 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     const [id, data] = request.data;
 
     // record existing tabs to be removed later
-    const tabIds = (await getTabs()).map(tab => tab.id);
+    const existing = await getTabs();
+    const tabIds = existing.map(tab => tab.id);
+
+    // update data store in case it's stale
+    const sessions = await getSessions();
+    sessions[id].tabs = existing;
+    await setSessions(sessions);
 
     // create new windows as necessary and update old window IDs
     // so the tab gets added to the correct new window
