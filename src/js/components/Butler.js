@@ -38,6 +38,7 @@ export default function Butler(props) {
 
   async function handleCreate(data) {
     const id = uniqueId();
+    setCurrent(id);
     await setCurrentSession(id);
 
     const sessions = await getSessions();
