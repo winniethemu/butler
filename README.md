@@ -14,6 +14,8 @@ With Butler, you no longer need to painfully navigate through or keep track of t
 
 ### Chrome Web Store
 
+[Link to Chrome Web Store](https://chrome.google.com/webstore/detail/butler/jfkbmadiafhgadcbecimbembmegnojbo)
+
 ### Manual Install
 
 Under project root, start by installing the third-party dependencies
@@ -32,4 +34,4 @@ Load the resulting `dist` folder in `chrome://extensions` to see a local build r
 
 ## License
 
-MIT. See LICENSE for a copy.
+MIT. [@yemutex](https://twitter.com/yemutex)
