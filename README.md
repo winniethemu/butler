@@ -34,4 +34,4 @@ Load the resulting `dist` folder in `chrome://extensions` to see a local build r
 
 ## License
 
-MIT. [@yemutex](https://twitter.com/yemutex)
+MIT [@yemutex](https://twitter.com/yemutex)
